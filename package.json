@@ -1,27 +1,26 @@
 {
-    "name": "friendfinder",
-    "version": "1.0.0",
-    "description": "An app that will locate friends who share similar interests with you.",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/LuckyP86H/Friend-Finder.git"
-    },
-    "author": "Steve Marshall",
-    "license": "ISC",
-    "bugs": {
-      "url": "https://github.com/LuckyP86H/Friend-Finder/issues"
-    },
-    "homepage": "https://github.com/LuckyP86H/Friend-Finder#readme",
-    "dependencies": {
-      "body-parser": "^1.18.2",
-      "express": "^4.16.2",
-      "fs": "0.0.1-security",
-      "mysql": "^2.15.0",
-      "path": "^0.12.7"
-    }
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "A fullstack dating application.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuckyP86H/Friend-Finder.git"
+  },
+  "author": "Steve Marshall",
+  "bugs": {
+    "url": "https://github.com/LuckyP86H/Friend-Finder/issues"
+  },
+  "homepage": "https://github.com/LuckyP86H/Friend-Finder#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "path": "^0.12.7",
+    "fs": "0.0.1-security",
+    "mysql": "^2.15.0"
   }
-  
+}
