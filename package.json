@@ -1,5 +1,5 @@
 {
-  "name": "friendfinder",
+  "name": "riendfinder",
   "version": "1.0.0",
   "description": "A fullstack dating application.",
   "main": "server.js",
@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/LuckyP86H/Friend-Finder#readme",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "path": "^0.12.7",
     "fs": "0.0.1-security",
-    "mysql": "^2.15.0"
+    "mysql": "^2.17.0"
   }
 }

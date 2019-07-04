@@ -1,7 +1,6 @@
 // Node Dependencies
 var path = require('path');
 
-
 // Includes Two Routes
 function htmlRoutes(app) {
 
@@ -16,7 +15,6 @@ function htmlRoutes(app) {
   });
 
 }
-
 
 // Export for use in main server.js file
 module.exports = htmlRoutes;
