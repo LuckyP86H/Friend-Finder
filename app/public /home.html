@@ -15,20 +15,31 @@
 	<!-- Load Font Awesome -->
 	<script src="https://use.fontawesome.com/e14e0f3537.js"></script>
 
-	<title>Friend Finder</title>
+	<title>Friend Finder Home</title>
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="jumbotron text-center">
-					<h1><i class="fa fa-user-circle-o" aria-hidden="true"></i> Friend Finder</h1>
-					<h2>Answer a few basic questions.</h2>
-					<h2>Then find the friend with the greatest compatibility!</h2>
-					<p><a class="btn btn-primary btn-lg" href="survey" role="button"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Begin Survey</a></p>
-				</div>
-			</div>
+
+		<!-- Hompage Content -->
+		<div class="jumbotron">
+  
+		  <!-- Hompage Headers -->
+		  <h1><span class="glyphicon glyphicon-fire" style="color: #d9534f"></span> Welcome to Friend Finder! <span class="glyphicon glyphicon-fire" style="color: #d9534f"></h1>
+		  <hr>
+		  <h2>Answer some basic questions about yourself.</h2>
+		  <h2>Then find a new friend with the greatest compatability!</h2>
+		  <br>
+  
+		  <!-- Hompage Submit Button -->
+		  <a href="/survey"><button type="button" class="btn btn-lg btn-danger"><h4><span class="glyphicon glyphicon-search"></span> Take the Quiz!</h4></button></a>  
+	  
 		</div>
+  
+	  <!-- Webpage Footer -->
+	  <footer class="footer">
+		  <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/tomtom28/friendfinder" target="_blank">GitHub Repo</a> | <a href="/">Home</a></p>
+	  </footer> 
+  
 	</div>
 </body>
 </html>

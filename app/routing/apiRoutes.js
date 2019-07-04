@@ -1,61 +1,73 @@
-var fs = require('fs');
+// Link in Friends Data
+var friendsData = require('../data/friends.js');
 
-module.exports = function(app, path) {
-	// Display all available friends
-	app.get("/api/friends", function(req, res) {
-		fs.readFile("app/data/friends.js", "utf8", function(err, data) {
-			if (err) {
-				return console.log(err);
-			}
 
-			else {
-				res.json(JSON.parse(data));
-			}
-		});
-	});
+// Includes Two Routes
+function apiRoutes(app) {
 
-	// Save the incoming result & determine the correct match
-	app.post("/api/friends", function(req, res) {
+  // A GET route with the url /api/friends. This will be used to display a JSON of all possible friends.
+  app.get('/api/friends', function (req, res) {
+    res.json(friendsData);
+  });
 
-		// This will be the returned closest match object.
-		var returnMe = [];
+  // A POST routes /api/friends. This will be used to handle incoming survey results. This route will also be used to handle the compatibility logic.
+  app.post('/api/friends', function (req, res) {
 
-		// postResponse is a string of JSON information
-		var postResponse = JSON.stringify(req.body);
+    // Parse new friend input to get integers (AJAX post seemed to make the numbers strings)
+    var newFriend = {
+      name: req.body.name,
+      photo: req.body.photo,
+      scores: []
+    };
+    var scoresArray = [];
+    for(var i=0; i < req.body.scores.length; i++){
+      scoresArray.push( parseInt(req.body.scores[i]) )
+    }
+    newFriend.scores = scoresArray;
 
-		fs.readFile('app/data/friends.js', function (err, data) {
-			// Read the existing array
-		    var friendFile = JSON.parse(data);
 
-		    // Store the difference in values
-		    var closestMatch = 0;
-		    var matchScore = 999999999999999;
+    // Cross check the new friend entry with the existing ones
+    var scoreComparisionArray = [];
+    for(var i=0; i < friendsData.length; i++){
 
-		    // Loop through the file to find the closest match
-		    for (var i = 0; i < friendFile.length; i++) {
-		    	var spaceBetween = 0;
-		    	for (var j = 0; j < friendFile[i]['answers[]'].length; j++) {
-		    		spaceBetween += Math.abs((parseInt(req.body['answers[]'][j]) - parseInt(friendFile[i]['answers[]'][j])));
-				}
+      // Check each friend's scores and sum difference in points
+      var currentComparison = 0;
+      for(var j=0; j < newFriend.scores.length; j++){
+        currentComparison += Math.abs( newFriend.scores[j] - friendsData[i].scores[j] );
+      }
 
-				// If the space between the current listing is the closest to the user, update the closestMatch
-				if(spaceBetween <= matchScore) {
-					matchScore = spaceBetween;
-					closestMatch = i;
-		    	}
-		    }
+      // Push each comparison between friends to array
+      scoreComparisionArray.push(currentComparison);
+    }
 
-		    // console.log("Closest match: " + friendFile[closestMatch].name);
+    // Determine the best match using the postion of best match in the friendsData array
+    var bestMatchPosition = 0; // assume its the first person to start
+    for(var i=1; i < scoreComparisionArray.length; i++){
+      
+      // Lower number in comparison difference means better match
+      if(scoreComparisionArray[i] <= scoreComparisionArray[bestMatchPosition]){
+        bestMatchPosition = i;
+      }
 
-		    returnMe.push(friendFile[closestMatch]);
+    }
 
-		    // Add the new person to the existing array
-		    friendFile.push(JSON.parse(postResponse));
+    // ***NOTE*** If the 2 friends have the same comparison, then the NEWEST entry in the friendsData array is chosen
+    var bestFriendMatch = friendsData[bestMatchPosition];
 
-		    // Push back the entire updated result immediately
-		    fs.writeFile("app/data/friends.js", JSON.stringify(friendFile));
-			res.send(returnMe[0]);
 
-		});
-	});
+
+    // Reply with a JSON object of the best match
+    res.json(bestFriendMatch);
+
+
+
+    // Push the new friend to the friends data array for storage
+    friendsData.push(newFriend);
+
+  });
+
 }
+
+
+// Export for use in main server.js file
+module.exports = apiRoutes;
