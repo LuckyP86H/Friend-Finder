@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/LuckyP86H/Friend-Finder#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.17.3",
+    "body-parser": "^1.20.9",
+    "express": "^4.22.3",
     "fs": "0.0.1-security",
     "mysql": "^2.15.0",
     "path": "^0.12.7"
